@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-18 18:54:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.Teacher" table="TEACHER">
+        <id name="teacherId" type="java.lang.Integer">
+            <column name="TEACHERID" />
+            <generator class="identity" />
+        </id>
+        <property name="teacherNo" type="java.lang.String">
+            <column name="TEACHERNO" />
+        </property>
+        <property name="teacherName" type="java.lang.String">
+            <column name="TEACHERNAME" />
+        </property>
+        <many-to-one name="profession" class="com.tae.domain.Profession" fetch="join">
+            <column name="PID" />
+        </many-to-one>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <set name="couresesTeachers" table="COURESESTEACHER" inverse="false" lazy="true">
+            <key>
+                <column name="TEACHERID" />
+            </key>
+            <one-to-many class="com.tae.domain.CouresesTeacher" />
+        </set>
+    </class>
+</hibernate-mapping>

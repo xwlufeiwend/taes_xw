@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-18 18:54:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.Courses" table="COURSES">
+        <id name="coursesId" type="java.lang.Integer">
+            <column name="COURSESID" />
+            <generator class="identity" />
+        </id>
+        <property name="coursesNo" type="java.lang.String">
+            <column name="COURSESNO" />
+        </property>
+        <property name="coursesName" type="java.lang.String">
+            <column name="COURSESNAME" />
+        </property>
+        <property name="credits" type="double">
+            <column name="CREDITS" />
+        </property>
+        <many-to-one name="profession" class="com.tae.domain.Profession" fetch="join">
+            <column name="PID" />
+        </many-to-one>
+        <set name="couresesTeachers" table="COURESESTEACHER" inverse="false" lazy="true">
+            <key>
+                <column name="COURSESID" />
+            </key>
+            <one-to-many class="com.tae.domain.CouresesTeacher" />
+        </set>
+        <set name="papers" table="PAPER" inverse="false" lazy="true">
+            <key>
+                <column name="COURSESID" />
+            </key>
+            <one-to-many class="com.tae.domain.Paper" />
+        </set>
+        <set name="scores" table="SCORE" inverse="false" lazy="true">
+            <key>
+                <column name="COURSESID" />
+            </key>
+            <one-to-many class="com.tae.domain.Score" />
+        </set>
+    </class>
+</hibernate-mapping>

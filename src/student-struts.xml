@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="student" namespace="/student" extends="struts-default">
+	    <global-allowed-methods>regex:.*</global-allowed-methods>
+	    <action name="student_*" method="{1}" class="studentAction">
+	        <result name="login">/sLogin.jsp</result>
+	        <result name="index">/student/sIndex.jsp</result>
+	        <result name="info">/student/info.jsp</result>
+	        
+	        <result name="uPassword">/student/uPassword.jsp</result>
+	        <result name="upSuccess">/student/brand.jsp</result>
+	        
+	        <result name="cShow">/student/showCourses.jsp</result>
+	    	
+	        <result name="cFind">/student/findCourses.jsp</result>
+	        <result name="fCourses">/student/showCourses.jsp</result>
+	        
+	        <result name="eShow">/student/showExam.jsp</result>
+	    
+	    	<result name="sShow">/student/scoreShow.jsp</result>
+	    	
+	    	<result name="sFind">/student/scoreFind.jsp</result>
+	    	<result name="fScore">/student/findScoreShow.jsp</result>
+	    </action>
+	    
+	</package>    
+    
+</struts>

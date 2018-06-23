@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="teacher" namespace="/teacher" extends="struts-default">
+	    <global-allowed-methods>regex:.*</global-allowed-methods>
+	    <action name="teacher_*" method="{1}" class="teacherAction">
+	        <result name="login">/tLogin.jsp</result>
+	        <result name="index">/teacher/tIndex.jsp</result>
+	        <result name="info">/teacher/info.jsp</result>
+	        <result name="pwd">/teacher/updatePwd.jsp</result>
+	        <result name="uPwd">/teacher/updateSuccess.jsp</result>
+	        <result name="cShow">/teacher/coursesShow.jsp</result>
+	        <result name="cShowAll">/teacher/showAllCourses.jsp</result>
+	        <result name="cstFind">/teacher/studentNum.jsp</result>
+	        <result name="cpFind">/teacher/showPaper.jsp</result>
+	        <result name="sShow">/teacher/selectCourses.jsp</result>
+	        <result name="sInfo">/teacher/selectCourses.jsp</result>
+	        <result name="sFind">/teacher/findStudent.jsp</result>
+	        <result name="finds">/teacher/findStudent.jsp</result>
+	        <result name="examShow">/teacher/showExam.jsp</result>
+	        
+	        <result name="scShow">/teacher/showScore.jsp</result>
+	        <result name="sScore">/teacher/score.jsp</result>
+	        
+	        <result name="scFind">/teacher/findScore.jsp</result>
+	        <result name="fScore">/teacher/fscore.jsp</result>
+	    </action>
+	</package>    
+    
+</struts>

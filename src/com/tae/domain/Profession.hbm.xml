@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-18 18:54:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.Profession" table="PROFESSION">
+        <id name="pId" type="java.lang.Integer" access="field">
+            <column name="PID" />
+            <generator class="identity" />
+        </id>
+        <property name="pNo" type="java.lang.String" access="field">
+            <column name="PNO" />
+        </property>
+        <property name="pName" type="java.lang.String" access="field">
+            <column name="PNAME" />
+        </property>
+        <many-to-one name="college" class="com.tae.domain.College" fetch="join">
+            <column name="COLLEGEID" />
+        </many-to-one>
+        <set name="courses" table="COURSES" inverse="false" lazy="true">
+            <key>
+                <column name="PID" />
+            </key>
+            <one-to-many class="com.tae.domain.Courses" />
+        </set>
+        <set name="teachers" table="TEACHER" inverse="false" lazy="true">
+            <key>
+                <column name="PID" />
+            </key>
+            <one-to-many class="com.tae.domain.Teacher" />
+        </set>
+        <set name="professionalClasses" table="PROFESSIONALCLASS" inverse="false" lazy="true">
+            <key>
+                <column name="PID" />
+            </key>
+            <one-to-many class="com.tae.domain.ProfessionalClass" />
+        </set>
+    </class>
+</hibernate-mapping>

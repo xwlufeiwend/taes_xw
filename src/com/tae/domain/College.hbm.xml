@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-18 18:54:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.College" table="COLLEGE">
+        <id name="collegeId" type="java.lang.Integer">
+            <column name="COLLEGEID" />
+            <generator class="identity" />
+        </id>
+        <property name="collegeNo" type="java.lang.String">
+            <column name="COLLEGENO" />
+        </property>
+        <property name="collegeName" type="java.lang.String">
+            <column name="COLLEGENAME" />
+        </property>
+        <set name="professions" table="PROFESSION" inverse="false" lazy="true">
+            <key>
+                <column name="COLLEGEID" />
+            </key>
+            <one-to-many class="com.tae.domain.Profession" />
+        </set>
+    </class>
+</hibernate-mapping>

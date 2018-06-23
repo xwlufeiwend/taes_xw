@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<!-- 引入外部的属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 配置连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+
+	<!-- 配置Hibernate的相关属性 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 注入连接池 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 配置Hibernate的属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 加载映射文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/tae/domain/College.hbm.xml</value>
+				<value>com/tae/domain/Courses.hbm.xml</value>
+				<value>com/tae/domain/Examination.hbm.xml</value>
+				<value>com/tae/domain/Paper.hbm.xml</value>
+				<value>com/tae/domain/ProfessionalClass.hbm.xml</value>
+				<value>com/tae/domain/Score.hbm.xml</value>
+				<value>com/tae/domain/Student.hbm.xml</value>
+				<value>com/tae/domain/Teacher.hbm.xml</value>
+				<value>com/tae/domain/Warden.hbm.xml</value>
+				<value>com/tae/domain/CouresesTeacher.hbm.xml</value>
+				<value>com/tae/domain/PaperScoreDetails.hbm.xml</value>
+				<value>com/tae/domain/ScoreDetails.hbm.xml</value>
+				<value>com/tae/domain/Profession.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 配置action的类 -->
+	<!-- 多例 scope="prototype" 
+		 在action中一般使用多例模式，因为需要创建多个对象
+		 在service和dao中常使用单例模式，节省使用资源
+	-->
+	<bean id="vcodeAction" class="com.tae.action.VcodeAction" scope="prototype">
+	    
+	</bean>
+	<!-- 配置业务层的类 -->
+	<!-- 配置DAO类 -->
+	<!-- 管理员的action service dao的配置 -->
+	<!-- 配置业务层的类 -->
+	<!-- 配置DAO类 -->
+	<!-- 管理员的action service dao的配置 -->
+	<bean id="wardenAction" class="com.tae.action.WardenAction" scope="prototype">
+	    <property name="wardenService" ref="wardenService"/>
+	</bean>
+	<bean id="wardenService" class="com.tae.service.impl.WardenServiceImpl">
+	    <property name="wardenDao" ref="wardenDao"/>
+	</bean>
+	<bean id="wardenDao" class="com.tae.dao.impl.WardenDaoImpl">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 院系action -->
+	<bean id="collegeAction" class="com.tae.action.CollegeAction" scope="prototype">
+	    <property name="collegeService" ref="collegeService"/>
+	</bean>
+	<bean id="collegeService" class="com.tae.service.impl.CollegeServiceImpl">
+	    <property name="collegeDao" ref="collegeDao"/>
+	</bean>
+	<bean id="collegeDao" class="com.tae.dao.impl.CollegeDaoImpl">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 院系action结束 -->
+	
+	<!-- 专业bean -->
+	<bean id="professionAction" class="com.tae.action.ProfessionAction" scope="prototype">
+	    <property name="professionService" ref="professionService"/>
+	</bean>
+	<bean id="professionService" class="com.tae.service.impl.ProfessionServiceImpl">
+	    <property name="collegeDao" ref="collegeDao"/>
+	    <property name="professionDao" ref="professionDao"/>
+	</bean>
+	<bean id="professionDao" class="com.tae.dao.impl.ProfessionDaoImpl">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 专业bean结束 -->
+	
+	<!-- 教师bean -->
+	<bean id="teacherAction" class="com.tae.action.TeacherAction" scope="prototype">
+	    <property name="teacherService" ref="teacherService"/>
+	</bean>
+	<bean id="teacherService" class="com.tae.service.impl.TeacherServiceImpl">
+	    <property name="teacherDao" ref="teacherDao"/>
+	    <property name="professionDao" ref="professionDao"/>
+	</bean>
+	<bean id="teacherDao" class="com.tae.dao.impl.TeacherDaoImpl">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 配置事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

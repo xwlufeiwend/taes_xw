@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-18 18:54:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.Student" table="STUDENT">
+        <id name="studentId" type="java.lang.Integer">
+            <column name="STUDENTID" />
+            <generator class="identity" />
+        </id>
+        <property name="studentNo" type="java.lang.String">
+            <column name="STUDENTNO" />
+        </property>
+        <property name="studentName" type="java.lang.String">
+            <column name="STUDENTNAME" />
+        </property>
+        <property name="xuezhi" type="int">
+            <column name="XUEZHI" />
+        </property>
+        <property name="admissionDate" type="java.lang.String">
+            <column name="ADMISSIONDATE" />
+        </property>
+        <many-to-one name="professionalClass" class="com.tae.domain.ProfessionalClass" fetch="join">
+            <column name="PCID" />
+        </many-to-one>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <set name="scores" table="SCORE" inverse="false" lazy="true">
+            <key>
+                <column name="STUDENTID" />
+            </key>
+            <one-to-many class="com.tae.domain.Score" />
+        </set>
+    </class>
+</hibernate-mapping>

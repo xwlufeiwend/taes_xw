@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-18 18:54:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.ScoreDetails" table="SCOREDETAILS">
+        <id name="sdId" type="java.lang.Integer">
+            <column name="SDID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="score" class="com.tae.domain.Score" fetch="select" unique="true">
+            <column name="SCOREID"></column>
+        </many-to-one>
+        <property name="title" type="java.lang.String">
+            <column name="TITLE" />
+        </property>
+        <property name="pscore" type="java.lang.Integer">
+            <column name="PSCORE" />
+        </property>
+    </class>
+</hibernate-mapping>

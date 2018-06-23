@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-18 18:54:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.Paper" table="PAPER">
+        <id name="paperId" type="java.lang.Integer">
+            <column name="PAPERID" />
+            <generator class="identity" />
+        </id>
+        <property name="paperNo" type="java.lang.String">
+            <column name="PAPERNO" />
+        </property>
+        <property name="paperName" type="java.lang.String">
+            <column name="PAPERNAME" />
+        </property>
+        <property name="fullScore" type="java.lang.Integer">
+            <column name="FULLSCORE" />
+        </property>
+        <property name="problemNum" type="java.lang.Integer">
+            <column name="PROBLEMNUM" />
+        </property>
+        <property name="tijiaoTeacher" type="java.lang.String">
+            <column name="TIJIAOTEACHER" />
+        </property>
+        <property name="shenheTeacher" type="java.lang.String">
+            <column name="SHENHETEACHER" />
+        </property>
+        <many-to-one name="courses" class="com.tae.domain.Courses" fetch="join">
+            <column name="COURSESID" />
+        </many-to-one>
+        <one-to-one name="paperScoreDetails" class="com.tae.domain.PaperScoreDetails" cascade="all"></one-to-one>
+        <set name="scores" table="SCORE" inverse="false" lazy="true">
+            <key>
+                <column name="PAPERID" />
+            </key>
+            <one-to-many class="com.tae.domain.Score" />
+        </set>
+    </class>
+</hibernate-mapping>

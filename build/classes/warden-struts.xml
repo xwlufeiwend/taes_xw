@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="Warden" namespace="/warden" extends="struts-default,json-default">
+	    <global-allowed-methods>regex:.*</global-allowed-methods>
+	   
+	    <action name="warden_*" class="wardenAction" method="{1}">
+			
+		    <result name="index">/warden/index.jsp</result>
+	        <result name="login">/wLogin.jsp</result> 
+	        <result name="info">/warden/info.jsp</result>
+	        <!-- <result name="add">
+	            
+	        </result>
+ -->	        
+ 			<result name="addto">/warden/brand.jsp</result>
+	        <result name="update">/warden/update.jsp</result>
+	        <result name="updateto">/warden/brand.jsp</result>
+		</action>
+
+	    <action name="mWarden" class="wardenAction" method="mWarden">
+	        <result type="json">
+	            <param name="root">mwa</param>
+	        </result>
+	    </action>
+	    <action name="warden_edit" class="wardenAction" method="edit">
+	         <result type="json">
+	            <param name="root">editData</param>
+	        </result>
+	    </action>
+	    <action name="warden_getNav" class="wardenAction" method="getNav">
+	         <result type="json">
+	            <param name="root">tree</param>
+	        </result>
+	    </action>
+	    <!-- 学院管理action -->
+	    <action name="showCollege" class="collegeAction" method="showCollege">
+	        <result type="json">
+	            <param name="root">show</param>
+	        </result>
+	    </action>
+	    <action name="college_add" class="collegeAction" method="college_add">   
+	    </action>
+	     <action name="college_edit" class="collegeAction" method="edit">
+	         <result type="json">
+	            <param name="root">editData</param>
+	        </result>
+	    </action>
+	    <action name="college_update" class="collegeAction" method="update">    
+	    </action>
+	    <action name="college_delete" class="collegeAction" method="delete">
+	    </action>
+	    <!-- 学院管理action结束 -->
+	    
+	    <!-- 专业管理action -->
+	    <action name="showProfession" class="professionAction" method="show">
+	        <result type="json">
+	            <param name="root">show</param>
+	        </result>
+	    </action>
+	    <action name="profession_add" class="professionAction" method="profession_add"></action>
+	    <action name="profession_edit" class="professionAction" method="edit">
+	        <result type="json">
+	            <param name="root">editData</param>
+	        </result>
+	    </action>
+	    <action name="profession_update" class="professionAction" method="update"></action>
+	    <action name="profession_delete" class="professionAction" method="delete"></action>
+	    <action name="profession_getCollegeName" class="professionAction" method="getCollegeName">
+	        <result type="json">
+	            <param name="root">cName</param>
+	        </result>
+	    </action>
+	    <!-- 专业管理action结束 -->
+	    
+	     <!-- 教师管理action -->
+	    <action name="showTeacher" class="teacherAction" method="show">
+	        <result type="json">
+	            <param name="root">show</param>
+	        </result>
+	    </action>
+	    <action name="teacher_add" class="teacherAction" method="add"></action>
+	    <action name="teacher_edit" class="teacherAction" method="edit">
+	        <result type="json">
+	            <param name="root">editData</param>
+	        </result>
+	    </action>
+	    <action name="teacher_update" class="teacherAction" method="update"></action>
+	    <action name="teacher_delete" class="teacherAction" method="delete"></action>
+	    <action name="teacher_getProfessionName" class="teacherAction" method="getProfessionName">
+	        <result type="json">
+	            <param name="root">pName</param>
+	        </result>
+	    </action>
+	    <!-- 教师管理action结束 -->
+	    
+	    
+	</package>
+</struts>

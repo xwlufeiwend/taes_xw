@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!-- <constant name="struts.devMode" value="true" /> -->
+	<!-- 将Action的创建交给spring来管理 -->
+	<!-- <constant name="struts.objectFactory" value="spring" /> -->
+
+	<!-- 更改struts2请求Action的后缀名，默认为action。若想去掉后缀，设为","即可 -->
+	<!-- <constant name="struts.action.extension" value=","></constant> -->
+	<!-- <global-result name="input">/bootstrap_form.jsp</global-result> -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" /> 
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	
+	<include file="warden-struts.xml"></include>
+	<include file="college-struts.xml"></include>
+	<!-- <include file="student-struts.xml"></include>
+	<include file="teacher-struts.xml"></include>
+	<include file="score-struts.xml"></include> -->
+	<package name="vcode" namespace="/" extends="struts-default">
+	    <action name="vCode" class="vcodeAction"></action>
+	</package>
+	
+	<package name="JSON" extends="json-default">
+	    <global-allowed-methods>regex:.*</global-allowed-methods>
+	    <action name="JsonAction_*" class="com.tae.action.JsonAction" method="{1}">
+	        <result name="fail"></result>
+	        <result type="json">
+	            <!-- result是action中的变量名，也是页面需要返回的数据，该变量需要有get/set方法 -->
+	            <param name="root">result</param>
+	        </result>
+	    </action>
+	</package>
+	
+</struts>

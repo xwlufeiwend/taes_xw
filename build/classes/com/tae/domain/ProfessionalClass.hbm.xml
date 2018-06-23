@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-18 18:54:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.ProfessionalClass" table="PROFESSIONALCLASS">
+        <id name="pcId" type="java.lang.Integer">
+            <column name="PCID" />
+            <generator class="identity" />
+        </id>
+        <property name="pcNo" type="java.lang.String">
+            <column name="PCNO" />
+        </property>
+        <property name="pcName" type="java.lang.String">
+            <column name="PCNAME" />
+        </property>
+        <property name="studentNum" type="java.lang.Integer">
+            <column name="STUDENTNUM" />
+        </property>
+        <many-to-one name="profession" class="com.tae.domain.Profession" fetch="join">
+            <column name="PID" />
+        </many-to-one>
+        <set name="examinations" table="EXAMINATION" inverse="false" lazy="true">
+            <key>
+                <column name="PCID" />
+            </key>
+            <one-to-many class="com.tae.domain.Examination" />
+        </set>
+        <set name="students" table="STUDENT" inverse="false" lazy="true">
+            <key>
+                <column name="PCID" />
+            </key>
+            <one-to-many class="com.tae.domain.Student" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-17 10:49:54 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.tae.domain.Warden" table="WARDEN">
+        <id name="wId" type="java.lang.Integer" access="field">
+            <column name="WID" />
+            <generator class="identity" />
+        </id>
+        <property name="wNo" type="java.lang.String" access="field">
+            <column name="WNO" />
+        </property>
+        <property name="wName" type="java.lang.String" access="field">
+            <column name="WNAME" />
+        </property>
+        <property name="tel" type="java.lang.String">
+            <column name="TEL" />
+        </property>
+        <property name="level" type="java.lang.String">
+            <column name="LEVEL" />
+        </property>
+        <property name="wPassword" type="java.lang.String" access="field">
+            <column name="WPASSWORD" />
+        </property>
+    </class>
+</hibernate-mapping>
